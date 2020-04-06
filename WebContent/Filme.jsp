@@ -12,5 +12,8 @@
 	<p><strong>Descrição: </strong>${filme.descricao}</p>
 	<p><strong>Diretor: </strong>${filme.diretor}</p>
 	<p><strong>Gênero: </strong>${filme.genero.nome}</p>
+	<p><strong>Popularidade: </strong>${filme.popularidade}</p>
+	<p><img src= "${filme.posterPath}"/>
+	
 </body>
 </html>

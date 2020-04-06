@@ -9,9 +9,9 @@ public class ConnectionFactory {
 		try {
 			//se descomentar uma linha não se esqueça de comentar a outra
 			//descomente a linha de baixo para MySQL 5.7
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			//descomente a linha de baixo para MySQL 8
-			//Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
