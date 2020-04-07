@@ -70,8 +70,8 @@ public class ManterFilmesController extends HttpServlet {
 			 
 			 FilmeService filmesvc = new FilmeService();
 			 int idDoFilme = filmesvc.inserirFilme(filme2);
-			 
-			 request.setAttribute("filme", idDoFilme);
+			 filme2.setId(idDoFilme);
+			 request.setAttribute("filme", filme2);
 
 				RequestDispatcher view2 = request.getRequestDispatcher("Filme.jsp");
 				view2.forward(request, response);
