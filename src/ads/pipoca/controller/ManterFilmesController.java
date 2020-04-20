@@ -35,7 +35,6 @@ public class ManterFilmesController extends HttpServlet {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd"); 
 		java.util.Date dataLanc = null;
 		ArrayList<Genero> generos = new ArrayList<Genero>(); 
-		ArrayList<Filme> filmes = new ArrayList<Filme>();
 
 		switch (acao) {
 		case "mostrar":
@@ -68,7 +67,7 @@ public class ManterFilmesController extends HttpServlet {
 			 diretor = request.getParameter("diretor");
 			idGenero = Integer.parseInt(request.getParameter("idgenero"));
 			GeneroService generoObj = new GeneroService();
-			Genero genero1 = genero.buscarGenero(idGenero);
+			Genero genero1 = generoObj.buscarGenero(idGenero);
 			
 			Filme filme2 = new Filme();
 			filme2.setTitulo(titulo);
@@ -131,7 +130,7 @@ public class ManterFilmesController extends HttpServlet {
 				saida = "Filme.jsp"; 
 
 			} else {
-				saida = "nExiste.html";
+				System.out.println("Filme Não existente");
 			}
 
 			break;

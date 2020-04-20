@@ -27,7 +27,6 @@ public class FilmeDAO {
 			pst.setInt(7, filme.getGenero().getId());
 			pst.execute();
 
-			// obter o id criado
 			String query = "select LAST_INSERT_ID()";
 			try (PreparedStatement pst1 = conn.prepareStatement(query); 
 					ResultSet rs = pst1.executeQuery();) {
@@ -130,8 +129,8 @@ public Filme atualizarFilme(Filme filme) throws IOException {
 		return result;
 	}
 	
-	public ArrayList<Filme> listarFilmes() throws IOException { //criar array listarFilmes
-		ArrayList<Filme> filmes = new ArrayList<>(); //instanciei objeto filmes na array
+	public ArrayList<Filme> listarFilmes() throws IOException { 
+		ArrayList<Filme> filmes = new ArrayList<>(); 
 		String sql = "select f.id, titulo, descricao, diretor, posterpath, popularidade, data_lancamento, id_genero, nome from filme f, genero g where f.id_genero = g.id";
 		
 		try (Connection conn = ConnectionFactory.getConnection();
@@ -152,13 +151,13 @@ public Filme atualizarFilme(Filme filme) throws IOException {
 				genero.setNome(rs.getString("nome"));
 				filme.setGenero(genero);
 				
-				filmes.add(filme); //adicionei o filme selecionado na array
+				filmes.add(filme); 
 				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
 		}
-		return filmes; //objeto da array listarFilmes
+		return filmes; 
 	}
 }
