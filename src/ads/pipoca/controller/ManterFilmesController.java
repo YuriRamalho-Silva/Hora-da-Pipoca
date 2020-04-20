@@ -3,6 +3,7 @@ package ads.pipoca.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -24,13 +25,24 @@ public class ManterFilmesController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String acao = request.getParameter("acao");
+		
+		Filme filme = null; 
+		Genero genero = null;
+		FilmeService fService = new FilmeService();
+		GeneroService gService = new GeneroService();
+		String saida = null, titulo = null, descricao = null, diretor = null, posterPath = null;
+		double popularidade;
+		int idGenero, idFilme;
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd"); 
+		java.util.Date dataLanc = null;
+		ArrayList<Genero> generos = new ArrayList<Genero>(); 
+		ArrayList<Filme> filmes = new ArrayList<Filme>();
 
 		switch (acao) {
 		case "mostrar":
 			String id_filme = request.getParameter("id_filme");
-			int idFilme = Integer.parseInt(id_filme);
-			FilmeService fService = new FilmeService();
-			Filme filme = fService.buscarFilme(idFilme);
+			idFilme = Integer.parseInt(id_filme);
+			filme = fService.buscarFilme(idFilme);
 			System.out.println(filme);
 
 			request.setAttribute("filme", filme);
@@ -40,12 +52,12 @@ public class ManterFilmesController extends HttpServlet {
 			break;
 			
 		case "inserir":
-			String titulo = request.getParameter("titulo");
-			String descricao = request.getParameter("descricao");
-			Double popularidade = Double.parseDouble(request.getParameter("popularidade"));
+			 titulo = request.getParameter("titulo");
+			 descricao = request.getParameter("descricao");
+			 popularidade = Double.parseDouble(request.getParameter("popularidade"));
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			
-			 Date dataLanc = null;
+			 dataLanc = null;
 			
 			try {
 				dataLanc = formatter.parse(request.getParameter("dtlanc"));
@@ -54,9 +66,9 @@ public class ManterFilmesController extends HttpServlet {
 			}
 			
 			String poster = request.getParameter("poster");
-			String diretor = request.getParameter("diretor");
-			int idGenero = Integer.parseInt(request.getParameter("idgenero"));
-			GeneroService genero = new GeneroService();
+			 diretor = request.getParameter("diretor");
+			idGenero = Integer.parseInt(request.getParameter("idgenero"));
+			GeneroService generoObj = new GeneroService();
 			Genero genero1 = genero.buscarGenero(idGenero);
 			
 			Filme filme2 = new Filme();
@@ -78,9 +90,53 @@ public class ManterFilmesController extends HttpServlet {
 				break;
 				
 		case "atualizar":
+			idFilme = Integer.parseInt(request.getParameter("id_filme"));
+
+			titulo = request.getParameter("titulo");
+			descricao = request.getParameter("descricao");
+			diretor = request.getParameter("diretor");
+			idGenero = Integer.parseInt(request.getParameter("genero"));
+			popularidade = Double.parseDouble(request.getParameter("popularidade"));
+			posterPath = request.getParameter("poster_path");
+			filme = new Filme();
+			filme.setTitulo(titulo);
+			filme.setDescricao(descricao);
+			filme.setDiretor(diretor);
+
+			try {
+				dataLanc = formater.parse(request.getParameter("data_lancamento"));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			filme.setDataLancamento(dataLanc);
+			filme.setPopularidade(popularidade);
+			filme.setPosterPath(posterPath);
+			genero = gService.buscarGenero(idGenero);
+			filme.setGenero(genero);
+			filme.setId(idFilme);
+			
+			//Filme filmeAtualizado = fService.atualizarFilme(filme); 
+			//request.setAttribute("filme", filmeAtualizado); 
+			saida = "Filme.jsp"; 
 			break;
+
 		case "excluir":
+
+			idFilme = Integer.parseInt(request.getParameter("id_excluir"));
+
+			filme = fService.buscarFilme(idFilme);
+			if (filme != null) {
+
+				//fService.excluirFilme(idFilme);
+				request.setAttribute("filme", filme); 
+				saida = "Filme.jsp"; 
+
+			} else {
+				saida = "nExiste.html";
+			}
+
 			break;
+		
 		}
 
 	}
