@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -115,8 +114,8 @@ public class ManterFilmesController extends HttpServlet {
 			filme.setGenero(genero);
 			filme.setId(idFilme);
 			
-			//Filme filmeAtualizado = fService.atualizarFilme(filme); 
-			//request.setAttribute("filme", filmeAtualizado); 
+			Filme filmeAtualizado = fService.atualizarFilme(filme); 
+			request.setAttribute("filme", filmeAtualizado); 
 			saida = "Filme.jsp"; 
 			break;
 
@@ -127,7 +126,7 @@ public class ManterFilmesController extends HttpServlet {
 			filme = fService.buscarFilme(idFilme);
 			if (filme != null) {
 
-				//fService.excluirFilme(idFilme);
+				fService.excluirFilme(idFilme);
 				request.setAttribute("filme", filme); 
 				saida = "Filme.jsp"; 
 
