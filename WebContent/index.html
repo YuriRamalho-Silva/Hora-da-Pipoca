@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Filme</title>
+<body>
+	<h1>Filme</h1>																	
+	<p> Digite o código do filme para mostrar seus dados.</p>				
+	<form action="manter_filmes.do" method="GET">  
+		<label>Id do Filme:</label>
+		<input type="text" name="id_filme"/> 
+		<input type="submit" name="acao" value="mostrar"> 
+	</form>
+	
+	<form action="atualizar_filme.do" method="GET">									
+	<h1>Atualizar Filme</h1>
+	<p> Digite o código do filme para atualizar seus dados.</p>
+	<label>Id do Filme:</label>
+		<input type="text" name="id_atualizar"/> 
+		<input type="submit" name="acao" value="page_atualizar">
+	</form>
+	
+	<form action="excluir_filmes.do" method="GET">									
+	<h1>Deletar Filme</h1>	
+	<p>Digite o código do filme que deseja excluir</p>
+	<label>Id do Filme:</label>
+		<input type="text" name="id_excluir"/>
+		<input type= "submit" name="acao" value="excluir">
+	</form>
+	<form action="listar_filmes.do" method="GET">									
+	<h1>Listar Filmes</h1>	
+	<p>Listar todos Filmes <input type= "submit" name="acao" value="filmes"> </p>	
+	</form>
+	
+	<form action="inserir_filmes.do" method="GET">									
+	<h1>Inserir Filme</h1>
+		<input type="submit" name="acao" value="generos">
+	</form>
+	
+	
+
+</body>
+</html>

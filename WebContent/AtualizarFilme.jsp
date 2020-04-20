@@ -11,7 +11,7 @@
 <body>
 <h1>Filme</h1>
 	<p> Digite os dados do filme para atualizar</p>
-	<form action="manter_filmes.do" method="POST"> 
+	<form action="atualizar_filmes.do" method="POST"> 
 		<p><input type= "hidden" name="id_filme" value="${filme.id}"/> </p> 
 		<p><label>Título do Filme: </label><input type="text" name="titulo" value="${filme.titulo}" required/> </p>
 		<p><label>Descrição: </label><input type="text" name="descricao" value="${filme.descricao}" /></p>
